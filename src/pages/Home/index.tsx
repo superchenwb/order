@@ -4,6 +4,7 @@ import {
   Text,
 } from 'react-native';
 import Header from './subpages/Header';
+import Footer from './subpages/Footer';
 
 class Home extends React.PureComponent {
   render() {
@@ -11,6 +12,7 @@ class Home extends React.PureComponent {
       <SafeAreaView>
         <Header />
         <Text>Home页面</Text>
+        <Footer />
       </SafeAreaView>
     )
   }
