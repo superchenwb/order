@@ -1,21 +1,34 @@
 import React from 'react';
 import {
   SafeAreaView,
-  Text,
+  ScrollView,
+  StyleSheet,
 } from 'react-native';
 import Header from './subpages/Header';
 import Footer from './subpages/Footer';
+import Body from './subpages/Body';
 
 class Home extends React.PureComponent {
   render() {
     return (
-      <SafeAreaView>
+      <SafeAreaView style={styles.container}>
         <Header />
-        <Text>Home页面</Text>
+        <ScrollView style={styles.scrollContainer}>
+          <Body />
+        </ScrollView>
         <Footer />
       </SafeAreaView>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  scrollContainer: {
+    flex: 1,
+  }
+})
 
 export default Home;
