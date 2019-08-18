@@ -1,9 +1,7 @@
 import React from 'react';
 import {
   View,
-  Text,
   StyleSheet,
-  Alert,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import SelectInput from '../../../../../components/SelectInput';
@@ -29,7 +27,7 @@ class SelectCategory extends React.PureComponent {
     this.closeModal();
   }
 
-  showModal = (value: number) => {
+  showModal = (value) => {
     this.setState({
       visible: true,
     })

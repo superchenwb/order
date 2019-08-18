@@ -63,7 +63,7 @@ class Body extends React.PureComponent<{}, IState> {
     });
   }
 
-  saveServiceArea = (selectedPointAreaIds: number[], selectedOtherAreaIds: number[]) => {
+  saveServiceArea = (selectedPointAreaIds, selectedOtherAreaIds) => {
     this.setState({
       selectedServiceAreaIds: [selectedPointAreaIds, selectedOtherAreaIds],
     })

@@ -16,15 +16,14 @@ class CategoryModel extends React.PureComponent {
 
   constructor(props) {
     super(props);
-    let selectedPointAreaIds: number[] = [];
-    let selectedOtherAreaIds: number[] = [];
+    let selectedPointAreaIds = [];
+    let selectedOtherAreaIds = [];
     if(props.selectedServiceAreaIds.length > 0) {
       ([selectedPointAreaIds, selectedOtherAreaIds = [] ] = props.selectedServiceAreaIds)
     }
     this.state = {
       selectedPointAreaIds,
       selectedOtherAreaIds,
-      isSelectedCategory: false,
     }
   }
 
@@ -51,7 +50,6 @@ class CategoryModel extends React.PureComponent {
         selectedOtherAreaIds: newSelectedOtherAreaIds.filter(id => newSelectedPointAreaIds.indexOf(id) === -1),
       })
     } else {
-      
       const deleteIndex = selectedOtherAreaIds.indexOf(value);
       if (deleteIndex === -1) {
         newSelectedOtherAreaIds.push(value);
@@ -63,13 +61,6 @@ class CategoryModel extends React.PureComponent {
         selectedOtherAreaIds: newSelectedOtherAreaIds,
       })
     }
-  }
-
-  // 是否选中
-  onChangeShowCategory = () => {
-    this.setState({
-      isSelectedCategory: false,
-    })
   }
 
   finishedAndClose = () => {
@@ -182,7 +173,7 @@ class CategoryModel extends React.PureComponent {
 
 const styles = StyleSheet.create({
   model: {
-    height: 600,
+    height: 500,
     backgroundColor: '#fff',
   },
   container: {
