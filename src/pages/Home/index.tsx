@@ -16,7 +16,10 @@ class Home extends React.PureComponent {
         <ScrollView style={styles.scrollContainer}>
           <Body />
         </ScrollView>
-        <Footer />
+        <Footer 
+          onPressNext={() => {}}
+          onPressPrevious={() => {}}
+        />
       </SafeAreaView>
     )
   }

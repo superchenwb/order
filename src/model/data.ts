@@ -30,8 +30,13 @@ const careerList: ICareer[] = [
   }
 ];
 
+export interface ICategory {
+  id: string;
+  title: string;
+}
+
 // 家居维修职业的品类
-const serviceCategoryList = [
+const serviceCategoryList: ICategory[] = [
   {
     id: '0',
     title: '家具',
@@ -98,8 +103,13 @@ const serviceCategoryList = [
   },
 ];
 
+export interface IType {
+  id: number;
+  title: string;
+}
+
 // 家居维修职业的服务类型
-const typeList = [
+const typeList: IType[] = [
   {
     id: 10,
     title: '安装',

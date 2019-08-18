@@ -6,16 +6,37 @@ import {
   StyleSheet,
 } from 'react-native';
 
-class Footer extends React.PureComponent {
+interface IProps {
+  previousText?: string,
+  onPressPrevious?: () => void;
+  nextText?: string;
+  onPressNext?: () => void;
+}
+
+class Footer extends React.PureComponent<IProps> {
   render() {
+    const { 
+      previousText = '上一步',
+      onPressPrevious,
+      nextText = '下一步',
+      onPressNext,
+    } = this.props;
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>上一步</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, styles.buttonPrimary]}>
-          <Text style={styles.buttonPrimaryText}>下一步</Text>
-        </TouchableOpacity>
+        {
+          !!onPressPrevious && (
+            <TouchableOpacity onPress={onPressPrevious} style={styles.button}>
+              <Text style={styles.buttonText}>{previousText}</Text>
+            </TouchableOpacity>
+          )
+        }
+        {
+          !!onPressNext && (
+            <TouchableOpacity onPress={onPressNext} style={[styles.button, styles.buttonPrimary]}>
+            <Text style={styles.buttonPrimaryText}>{nextText}</Text>
+          </TouchableOpacity>
+          )
+        }
       </View>
     )
   }
