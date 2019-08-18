@@ -189,9 +189,56 @@ const areaList: IArea[] = [
   },
 ];
 
+// 远程费用
+const yuanchengFeiyongs = [
+  {
+    value: 5,
+    title: '5元/公里'
+  },
+  {
+    value: 10,
+    title: '10元/公里'
+  },
+  {
+    value: 15,
+    title: '15元/公里'
+  },
+];
+
+// 抬楼费用
+const tailouFeiyongs = [
+  {
+    value: 3,
+    title: '3元/层'
+  },
+  {
+    value: 5,
+    title: '5元/层'
+  },
+  {
+    value: 10,
+    title: '10元/层'
+  },
+];
+
+// 低竞争方式
+const diJingZhengs = [
+  {
+    value: 1,
+    title: '接受'
+  },
+  {
+    value: 2,
+    title: '不接受'
+  },
+];
+
 export {
   careerList,
   serviceCategoryList,
   serviceTypeList,
   areaList,
+  yuanchengFeiyongs,
+  tailouFeiyongs,
+  diJingZhengs,
 }

@@ -9,6 +9,7 @@ import {
   careerList, 
   ICareer,
 } from '../../../../model/data';
+import SelectServicePromise from './SelectServicePromise';
 
 interface IState {
   selectedCareerId: number;
@@ -30,9 +31,9 @@ class Body extends React.PureComponent<{}, IState> {
       selectedCategoryIds: [],
       selectedTypeIdLists: [],
       selectedServiceAreaIds: [],
+      selectedServicePromiseIds: [],
     }
   }
-  
 
   // 切换职业
   onChangeCareer = (career: ICareer) => {
@@ -70,14 +71,21 @@ class Body extends React.PureComponent<{}, IState> {
     })
   }
 
+  saveServicePromise = (yuanchengFeiYongId: number, tailouFeiYongId: number, acceptId: number) => {
+    this.setState({
+      selectedServicePromiseIds: [yuanchengFeiYongId, tailouFeiYongId, acceptId],
+    })
+  }
+
   render() {
-    const { 
+    const {
       selectedCareerId, 
       isSelectedCareer,
       canSelectLength,
       selectedCategoryIds,
       selectedTypeIdLists,
       selectedServiceAreaIds,
+      selectedServicePromiseIds,
     } = this.state;
     return (
       <View>
@@ -101,10 +109,13 @@ class Body extends React.PureComponent<{}, IState> {
                 selectedServiceAreaIds={selectedServiceAreaIds}
                 saveServiceArea={this.saveServiceArea}
               />
+              <SelectServicePromise
+                selectedServicePromiseIds={selectedServicePromiseIds}
+                saveServicePromise={this.saveServicePromise}
+              />
             </>
           )
         }
-        
       </View>
     )
   }
