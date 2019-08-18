@@ -10,10 +10,34 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Title from '../../../../../components/Title';
 import CheckboxButton from '../../../../../components/CheckboxButton';
 import Footer from '../../Footer';
+import {
+  ICategory,
+  IType,
+} from '../../../../../model/data';
 
-class CategoryModal extends React.PureComponent {
+interface IProps {
+  closeModal: () => void;
+  serviceCategoryList: ICategory[];
+  typeList: IType[];
+  currentIndex: number;
+  saveCategory: (selectedCategoryId: string, selectedTypeIds: number[]) => void;
+  selectedCategoryIds: string[];
+  // [[1, 2]]
+  selectedTypeIdLists: number[][];
+  isLast: boolean;
+  clean: () => void;
+}
+
+interface IState {
+  selectedCategoryIds: string[];
+  selectedCategoryId: string;
+  selectedTypeIds: number[];
+  isSelectedCategory: boolean;
+}
+
+class CategoryModal extends React.PureComponent<IProps, IState> {
   
-  constructor(props) {
+  constructor(props: IProps) {
     super(props);
     const { selectedCategoryIds, selectedTypeIdLists, currentIndex } = props;
     this.state = {
@@ -24,7 +48,7 @@ class CategoryModal extends React.PureComponent {
     }
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(nextProps: IProps, prevState: IState) {
     if(nextProps.selectedCategoryIds !== prevState.selectedCategoryIds) {
       return {
         selectedCategoryIds: nextProps.selectedCategoryIds,
@@ -41,7 +65,7 @@ class CategoryModal extends React.PureComponent {
     clean();
   }
 
-  changeCategory = (value) => {
+  changeCategory = (value: string) => {
     const { isSelectedCategory } = this.state;
     this.setState({
       selectedCategoryId: value,
@@ -55,7 +79,7 @@ class CategoryModal extends React.PureComponent {
     })
   }
 
-  changeType = (value) => {
+  changeType = (value: number) => {
     const { selectedTypeIds } = this.state;
     let newSelectedTypeIds = [ ...selectedTypeIds ];
     const deleteIndex = newSelectedTypeIds.indexOf(value);
@@ -83,7 +107,7 @@ class CategoryModal extends React.PureComponent {
     saveCategory(selectedCategoryId, selectedTypeIds);
   }
 
-  renderCategory = (category) => {
+  renderCategory = (category: ICategory) => {
     const { selectedCategoryId, isSelectedCategory } = this.state;
     const { selectedCategoryIds, currentIndex } = this.props;
     const checked = selectedCategoryId === category.id;
@@ -118,7 +142,7 @@ class CategoryModal extends React.PureComponent {
     }
   }
 
-  renderType = (type) => {
+  renderType = (type: IType) => {
     const { selectedTypeIds } = this.state;
     const checked = selectedTypeIds.indexOf(type.id) > -1;
     

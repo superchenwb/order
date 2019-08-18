@@ -49,7 +49,7 @@ class Body extends React.PureComponent<{}, IState> {
   }
 
   // 保存服务类目和服务类型
-  saveCategory = (selectedCategoryId, selectedTypeIds, currentIndex) => {
+  saveCategory = (selectedCategoryId: string, selectedTypeIds: number[], currentIndex: number) => {
     const { selectedCategoryIds, selectedTypeIdLists } = this.state;
     const newSelectedCategoryIds = [ ...selectedCategoryIds ];
     const newSelectedTypeIdLists = [ ...selectedTypeIdLists ];

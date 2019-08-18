@@ -7,7 +7,14 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-class SelectInput extends React.PureComponent {
+interface IProps {
+  value: number;
+  onChange: (value: number) => void;
+  text: string;
+  placeholder?: string;
+}
+
+class SelectInput extends React.PureComponent<IProps> {
 
   onPress = () => {
     const { onChange, value } = this.props;

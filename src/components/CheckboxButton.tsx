@@ -10,7 +10,15 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 const { width } = Dimensions.get('window');
 
-class CheckboxButton extends React.PureComponent {
+interface IProps {
+  value: any;
+  title: string;
+  disabled?: boolean;
+  checked: boolean;
+  onPress?: (value: any) => void;
+}
+
+class CheckboxButton extends React.PureComponent<IProps> {
   
   onPress = () => {
     const { onPress, value, disabled  } = this.props;

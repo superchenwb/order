@@ -14,7 +14,15 @@ import {
   serviceTypeList,
 } from '../../../../../model/data';
 
-class SelectCategory extends React.PureComponent {
+interface IProps {
+  canSelectLength: number;
+  selectedCategoryIds: string[];
+  selectedTypeIdLists: number[][];
+  saveCategory: (selectedCategoryId: string, selectedTypeIds: number[], currentIndex: number) => void;
+  clean: () => void;
+}
+
+class SelectCategory extends React.PureComponent<IProps> {
   
   state = {
     visible: false,
@@ -34,7 +42,7 @@ class SelectCategory extends React.PureComponent {
     });
   }
 
-  saveCategory = (selectedCategoryId, selectedTypeIds) => {
+  saveCategory = (selectedCategoryId: string, selectedTypeIds: number[]) => {
     const { saveCategory } = this.props;
     const { currentIndex } = this.state;
     saveCategory(selectedCategoryId, selectedTypeIds, currentIndex);
@@ -43,7 +51,7 @@ class SelectCategory extends React.PureComponent {
     });
   }
 
-  renderInput = (item) => {
+  renderInput = (item: number) => {
     const { selectedTypeIdLists, selectedCategoryIds } = this.props;
     let text = '';
     

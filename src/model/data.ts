@@ -125,8 +125,68 @@ const serviceTypeList: IType[] = [
   },
 ];
 
+const areaList = [
+  {
+    id: 0,
+    title: '新洲区',
+  },
+  {
+    id: 1,
+    title: '黄陂区',
+  },
+  {
+    id: 2,
+    title: '江夏区',
+  },
+  {
+    id: 3,
+    title: '蔡甸区',
+  },
+  {
+    id: 4,
+    title: '汉南区',
+  },
+  {
+    id: 5,
+    title: '东西湖区',
+  },
+  {
+    id: 6,
+    title: '洪山区',
+  },
+  {
+    id: 7,
+    title: '青山区',
+  },
+  {
+    id: 8,
+    title: '武昌区',
+  },
+  {
+    id: 9,
+    title: '汉阳区',
+  },
+  {
+    id: 10,
+    title: '硚口区',
+  },
+  {
+    id: 11,
+    title: '江汉区',
+  },
+  {
+    id: 12,
+    title: '江岸区',
+  },
+  {
+    id: 13,
+    title: '市辖区',
+  },
+];
+
 export {
   careerList,
   serviceCategoryList,
   serviceTypeList,
+  areaList,
 }
