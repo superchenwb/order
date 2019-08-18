@@ -3,13 +3,29 @@ import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert } from 'rea
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CheckboxButton from '../../../../../components/CheckboxButton';
 import Footer from '../../Footer';
+import { IPromise } from '../../../../../model/data';
+
+interface IState {
+  yuanchengFeiYongId: number;
+  tailouFeiYongId: number;
+  acceptId: number;
+}
+
+interface IProps {
+  closeModal: () => void;
+  saveServicePromise: (yuanchengFeiYongId: number, tailouFeiYongId: number, acceptId: number) => void;
+  yuanchengFeiyongs: IPromise[];
+  tailouFeiyongs: IPromise[];
+  diJingZhengs: IPromise[];
+  selectedServicePromiseIds: number[];
+}
 
 /**
  * 服务承诺选择组件
  */
-class ServicePromiseModal extends PureComponent {
+class ServicePromiseModal extends PureComponent<IProps, IState> {
 
-  constructor(props) {
+  constructor(props: IProps) {
     super(props);
     let yuanchengFeiYongId;
     let tailouFeiYongId;
@@ -22,19 +38,19 @@ class ServicePromiseModal extends PureComponent {
     }
   }
 
-  onChangeYuanchengFeiYong = (value) => {
+  onChangeYuanchengFeiYong = (value: number) => {
     this.setState({
       yuanchengFeiYongId: value,
     })
   }
 
-  onChangeTailouFeiYong = (value) => {
+  onChangeTailouFeiYong = (value: number) => {
     this.setState({
       tailouFeiYongId: value,
     })
   }
 
-  onChangeAccept = (value) => {
+  onChangeAccept = (value: number) => {
     this.setState({
       acceptId: value,
     })

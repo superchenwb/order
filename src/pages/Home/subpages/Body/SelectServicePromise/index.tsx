@@ -10,17 +10,23 @@ import ServicePromiseModel from './ServicePromiseModel';
 import {
   yuanchengFeiyongs, tailouFeiyongs, diJingZhengs,
 } from '../../../../../model/data';
+
+interface IProps {
+  selectedServicePromiseIds: number[];
+  saveServicePromise: (yuanchengFeiYongId: number, tailouFeiYongId: number, acceptId: number) => void;
+}
+
 /**
  *  选择服务承诺
  * 
  */
-class SelectServicePromise extends React.PureComponent {
+class SelectServicePromise extends React.PureComponent<IProps> {
 
   state = {
     visible: false,
   }
 
-  saveServicePromise = (yuanchengFeiYongId, tailouFeiYongId, acceptId) => {
+  saveServicePromise = (yuanchengFeiYongId: number, tailouFeiYongId: number, acceptId: number) => {
     const { saveServicePromise } = this.props;
     saveServicePromise(yuanchengFeiYongId, tailouFeiYongId, acceptId);
     this.closeModal();
@@ -41,9 +47,9 @@ class SelectServicePromise extends React.PureComponent {
   getText = () => {
     let text = ''
     const { selectedServicePromiseIds } = this.props;
-    let yuanchengFeiYongId;
-    let tailouFeiYongId;
-    let acceptId;
+    let yuanchengFeiYongId: number;
+    let tailouFeiYongId: number;
+    let acceptId: number;
     ([yuanchengFeiYongId, tailouFeiYongId, acceptId] = selectedServicePromiseIds);
     const yuanchengFeiyong = yuanchengFeiyongs.find(item => item.value === yuanchengFeiYongId);
     const tailouFeiyong = tailouFeiyongs.find(item => item.value === tailouFeiYongId);

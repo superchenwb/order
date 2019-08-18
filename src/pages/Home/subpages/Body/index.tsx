@@ -18,6 +18,7 @@ interface IState {
   selectedCategoryIds: string[];
   selectedTypeIdLists: number[][];
   selectedServiceAreaIds: number[][];
+  selectedServicePromiseIds: number[];
 }
 
 class Body extends React.PureComponent<{}, IState> {

@@ -189,8 +189,13 @@ const areaList: IArea[] = [
   },
 ];
 
+export interface IPromise {
+  value: number;
+  title: string;
+}
+
 // 远程费用
-const yuanchengFeiyongs = [
+const yuanchengFeiyongs: IPromise[] = [
   {
     value: 5,
     title: '5元/公里'
@@ -206,7 +211,7 @@ const yuanchengFeiyongs = [
 ];
 
 // 抬楼费用
-const tailouFeiyongs = [
+const tailouFeiyongs: IPromise[] = [
   {
     value: 3,
     title: '3元/层'
@@ -222,7 +227,7 @@ const tailouFeiyongs = [
 ];
 
 // 低竞争方式
-const diJingZhengs = [
+const diJingZhengs: IPromise[] = [
   {
     value: 1,
     title: '接受'
