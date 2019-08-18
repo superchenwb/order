@@ -10,25 +10,11 @@ import Title from '../../../../../components/Title';
 import SelectInput from '../../../../../components/SelectInput';
 import CategoryModal from './CategoryModal';
 import {
-  ICategory,
-  IType,
+  serviceCategoryList,
+  serviceTypeList,
 } from '../../../../../model/data';
 
-interface IProps {
-  canSelectLength: number;
-  serviceCategoryList: ICategory[];
-  typeList: IType[];
-  selectedCategoryIds: string[];
-  selectedTypeIdLists: number[][];
-  saveCategory: (selectedCategoryId: string, selectedTypeIds: number[], currentIndex: number) => void;
-}
-
-interface IState {
-  visible: boolean;
-  currentIndex: number;
-}
-
-class SelectCategory extends React.PureComponent<IProps, IState> {
+class SelectCategory extends React.PureComponent {
   
   state = {
     visible: false,
@@ -48,7 +34,7 @@ class SelectCategory extends React.PureComponent<IProps, IState> {
     });
   }
 
-  saveCategory = (selectedCategoryId: string, selectedTypeIds: number[]) => {
+  saveCategory = (selectedCategoryId, selectedTypeIds) => {
     const { saveCategory } = this.props;
     const { currentIndex } = this.state;
     saveCategory(selectedCategoryId, selectedTypeIds, currentIndex);
@@ -57,8 +43,8 @@ class SelectCategory extends React.PureComponent<IProps, IState> {
     });
   }
 
-  renderInput = (item: number) => {
-    const { serviceCategoryList, typeList, selectedTypeIdLists, selectedCategoryIds } = this.props;
+  renderInput = (item) => {
+    const { selectedTypeIdLists, selectedCategoryIds } = this.props;
     let text = '';
     
     if(selectedCategoryIds) {
@@ -71,7 +57,7 @@ class SelectCategory extends React.PureComponent<IProps, IState> {
 
     if(selectedTypeIdLists && selectedTypeIdLists[item]) {
       const selectedTypeIds = selectedTypeIdLists[item];
-      const typeTitles = typeList.filter(type => selectedTypeIds.indexOf(type.id) > -1).map(type => type.title);
+      const typeTitles = serviceTypeList.filter(type => selectedTypeIds.indexOf(type.id) > -1).map(type => type.title);
       if(typeTitles) {
         text += ` - ${typeTitles.join()}`;
       }
@@ -90,11 +76,10 @@ class SelectCategory extends React.PureComponent<IProps, IState> {
   render() {
     const { visible, currentIndex } = this.state;
     const { 
-      canSelectLength, 
-      serviceCategoryList,
-      typeList,
+      canSelectLength,
       selectedCategoryIds,
       selectedTypeIdLists,
+      clean,
     } = this.props;
     const canSelectList = Array.from({ length: canSelectLength }, (item, i) => i);
     return (
@@ -114,12 +99,13 @@ class SelectCategory extends React.PureComponent<IProps, IState> {
           <CategoryModal
             closeModal={this.closeModal}
             serviceCategoryList={serviceCategoryList}
-            typeList={typeList}
+            typeList={serviceTypeList}
             currentIndex={currentIndex}
             saveCategory={this.saveCategory}
             selectedCategoryIds={selectedCategoryIds}
             selectedTypeIdLists={selectedTypeIdLists}
             isLast={canSelectLength === currentIndex + 1}
+            clean={clean}
           />
         </Modal>
       </View>

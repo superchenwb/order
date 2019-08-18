@@ -10,15 +10,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 const { width } = Dimensions.get('window');
 
-interface IProps {
-  title: string;
-  value: any;
-  checked: boolean;
-  onPress?: (value: any) => void;
-  disabled?: boolean;
-}
-
-class CheckboxButton extends React.PureComponent<IProps> {
+class CheckboxButton extends React.PureComponent {
   
   onPress = () => {
     const { onPress, value, disabled  } = this.props;
@@ -28,7 +20,7 @@ class CheckboxButton extends React.PureComponent<IProps> {
   }
   
   render() {
-    const { title, checked, disabled  } = this.props;
+    const { title, checked, disabled } = this.props;
     const containerStyle = [styles.container, checked && styles.checkedContainer, disabled && styles.disabledConatiner];
     return (
       <TouchableOpacity

@@ -1,16 +1,12 @@
 import React from 'react';
 import {
   View,
-  Text,
-  Alert,
 } from 'react-native';
 import SelectCareer from './SelectCareer';
 import SelectCategory from './SelectCategory';
 import {
   careerList, 
   ICareer,
-  serviceCategoryList,
-  typeList,
 } from '../../../../model/data';
 
 interface IState {
@@ -45,8 +41,15 @@ class Body extends React.PureComponent<{}, IState> {
     })
   }
 
+  clean = () => {
+    this.setState({
+      selectedCategoryIds: [],
+      selectedTypeIdLists: [],
+    })
+  }
+
   // 保存服务类目和服务类型
-  saveCategory = (selectedCategoryId: string, selectedTypeIds: number[], currentIndex: number) => {
+  saveCategory = (selectedCategoryId, selectedTypeIds, currentIndex) => {
     const { selectedCategoryIds, selectedTypeIdLists } = this.state;
     const newSelectedCategoryIds = [ ...selectedCategoryIds ];
     const newSelectedTypeIdLists = [ ...selectedTypeIdLists ];
@@ -78,11 +81,10 @@ class Body extends React.PureComponent<{}, IState> {
           isSelectedCareer && (
             <SelectCategory 
               canSelectLength={canSelectLength}
-              serviceCategoryList={serviceCategoryList}
-              typeList={typeList}
               saveCategory={this.saveCategory}
               selectedCategoryIds={selectedCategoryIds}
               selectedTypeIdLists={selectedTypeIdLists}
+              clean={this.clean}
             />
           )
         }

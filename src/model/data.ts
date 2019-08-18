@@ -30,6 +30,7 @@ const careerList: ICareer[] = [
   }
 ];
 
+
 export interface ICategory {
   id: string;
   title: string;
@@ -109,7 +110,7 @@ export interface IType {
 }
 
 // 家居维修职业的服务类型
-const typeList: IType[] = [
+const serviceTypeList: IType[] = [
   {
     id: 10,
     title: '安装',
@@ -127,5 +128,5 @@ const typeList: IType[] = [
 export {
   careerList,
   serviceCategoryList,
-  typeList,
+  serviceTypeList,
 }

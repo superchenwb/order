@@ -10,44 +10,21 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Title from '../../../../../components/Title';
 import CheckboxButton from '../../../../../components/CheckboxButton';
 import Footer from '../../Footer';
-import {
-  ICategory,
-  IType,
-} from '../../../../../model/data';
 
-interface IProps {
-  closeModal: () => void;
-  serviceCategoryList: ICategory[];
-  typeList: IType[];
-  selectedCategoryIds: string[];
-  selectedTypeIdLists: number[][];
-  currentIndex: number;
-  isLast: boolean;
-  saveCategory: (selectedCategoryId: string, selectedTypeIds: number[]) => void;
-}
-
-interface IState {
-  selectedCategoryIds: string[];
-  selectedCategoryId: string;
-  isSelectedCategory: boolean;
-  selectedTypeIds: number[];
-}
-
-class CategoryModal extends React.PureComponent<IProps, IState> {
+class CategoryModal extends React.PureComponent {
   
-  constructor(props: IProps) {
+  constructor(props) {
     super(props);
-    const selectedTypeIds: number[] = [];
     const { selectedCategoryIds, selectedTypeIdLists, currentIndex } = props;
     this.state = {
       selectedCategoryIds,
       selectedCategoryId: selectedCategoryIds[currentIndex],
-      selectedTypeIds: selectedTypeIdLists[currentIndex] || selectedTypeIds,
+      selectedTypeIds: selectedTypeIdLists[currentIndex] || [],
       isSelectedCategory: false,
     }
   }
 
-  static getDerivedStateFromProps(nextProps: IProps, prevState: IState) {
+  static getDerivedStateFromProps(nextProps, prevState) {
     if(nextProps.selectedCategoryIds !== prevState.selectedCategoryIds) {
       return {
         selectedCategoryIds: nextProps.selectedCategoryIds,
@@ -59,7 +36,12 @@ class CategoryModal extends React.PureComponent<IProps, IState> {
     return null;
   }
 
-  changeCategory = (value: string) => {
+  clean = () => {
+    const { clean } = this.props;
+    clean();
+  }
+
+  changeCategory = (value) => {
     const { isSelectedCategory } = this.state;
     this.setState({
       selectedCategoryId: value,
@@ -73,9 +55,9 @@ class CategoryModal extends React.PureComponent<IProps, IState> {
     })
   }
 
-  changeType = (value: number) => {
+  changeType = (value) => {
     const { selectedTypeIds } = this.state;
-    let newSelectedTypeIds: number[] = [ ...selectedTypeIds ];
+    let newSelectedTypeIds = [ ...selectedTypeIds ];
     const deleteIndex = newSelectedTypeIds.indexOf(value);
     if(deleteIndex === -1) {
       newSelectedTypeIds.push(value);
@@ -101,7 +83,7 @@ class CategoryModal extends React.PureComponent<IProps, IState> {
     saveCategory(selectedCategoryId, selectedTypeIds);
   }
 
-  renderCategory = (category: ICategory) => {
+  renderCategory = (category) => {
     const { selectedCategoryId, isSelectedCategory } = this.state;
     const { selectedCategoryIds, currentIndex } = this.props;
     const checked = selectedCategoryId === category.id;
@@ -136,7 +118,7 @@ class CategoryModal extends React.PureComponent<IProps, IState> {
     }
   }
 
-  renderType = (type: IType) => {
+  renderType = (type) => {
     const { selectedTypeIds } = this.state;
     const checked = selectedTypeIds.indexOf(type.id) > -1;
     
@@ -158,6 +140,11 @@ class CategoryModal extends React.PureComponent<IProps, IState> {
       <View style={styles.modal}>
         <TouchableOpacity style={styles.close} onPress={closeModal}>
           <Icon name="close" size={22} color="#999" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.clean} onPress={this.clean}>
+          <Text style={styles.cleanText}>
+            <Icon name="trash" size={18} color="#999" /> 清空
+          </Text>
         </TouchableOpacity>
         <ScrollView>
           <Title title="选择服务类目" />
@@ -201,6 +188,15 @@ const styles = StyleSheet.create({
     right: 10,
     top: 10,
     zIndex: 9,
+  },
+  clean: {
+    position: 'absolute',
+    right: 40,
+    top: 10,
+    zIndex: 9,
+  },
+  cleanText: {
+    color: '#999',
   },
   categoryList: {
     flexDirection: 'row',
