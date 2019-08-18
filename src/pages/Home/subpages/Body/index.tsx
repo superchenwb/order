@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import SelectCareer from './SelectCareer';
 import SelectCategory from './SelectCategory';
+import SelectServiceArea from './SelectServiceArea';
 import {
   careerList, 
   ICareer,
@@ -27,6 +28,7 @@ class Body extends React.PureComponent<{}, IState> {
       canSelectLength: 3,   // 可以选择的服务品类个数
       selectedCategoryIds: [],
       selectedTypeIdLists: [],
+      selectedServiceAreaIds: [],
     }
   }
   
@@ -61,6 +63,12 @@ class Body extends React.PureComponent<{}, IState> {
     });
   }
 
+  saveServiceArea = (selectedPointAreaIds: number[], selectedOtherAreaIds: number[]) => {
+    this.setState({
+      selectedServiceAreaIds: [selectedPointAreaIds, selectedOtherAreaIds],
+    })
+  }
+
   render() {
     const { 
       selectedCareerId, 
@@ -68,6 +76,7 @@ class Body extends React.PureComponent<{}, IState> {
       canSelectLength,
       selectedCategoryIds,
       selectedTypeIdLists,
+      selectedServiceAreaIds,
     } = this.state;
     return (
       <View>
@@ -79,13 +88,19 @@ class Body extends React.PureComponent<{}, IState> {
         />
         {
           isSelectedCareer && (
-            <SelectCategory 
-              canSelectLength={canSelectLength}
-              saveCategory={this.saveCategory}
-              selectedCategoryIds={selectedCategoryIds}
-              selectedTypeIdLists={selectedTypeIdLists}
-              clean={this.clean}
-            />
+            <>
+              <SelectCategory 
+                canSelectLength={canSelectLength}
+                saveCategory={this.saveCategory}
+                selectedCategoryIds={selectedCategoryIds}
+                selectedTypeIdLists={selectedTypeIdLists}
+                clean={this.clean}
+              />
+              <SelectServiceArea
+                selectedServiceAreaIds={selectedServiceAreaIds}
+                saveServiceArea={this.saveServiceArea}
+              />
+            </>
           )
         }
         
