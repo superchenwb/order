@@ -16,6 +16,7 @@ interface IState {
   canSelectLength: number;
   selectedCategoryIds: string[];
   selectedTypeIdLists: number[][];
+  selectedServiceAreaIds: number[][];
 }
 
 class Body extends React.PureComponent<{}, IState> {
@@ -63,7 +64,7 @@ class Body extends React.PureComponent<{}, IState> {
     });
   }
 
-  saveServiceArea = (selectedPointAreaIds, selectedOtherAreaIds) => {
+  saveServiceArea = (selectedPointAreaIds: number[], selectedOtherAreaIds: number[]) => {
     this.setState({
       selectedServiceAreaIds: [selectedPointAreaIds, selectedOtherAreaIds],
     })

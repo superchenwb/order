@@ -125,7 +125,12 @@ const serviceTypeList: IType[] = [
   },
 ];
 
-const areaList = [
+export interface IArea {
+  id: number;
+  title: string;
+}
+
+const areaList: IArea[] = [
   {
     id: 0,
     title: '新洲区',

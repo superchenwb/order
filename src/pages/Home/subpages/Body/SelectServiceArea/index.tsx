@@ -11,11 +11,16 @@ import {
   areaList,
 } from '../../../../../model/data';
 
+interface IProps {
+  selectedServiceAreaIds: number[][];
+  saveServiceArea: (selectedPointAreaIds: number[], selectedOtherAreaIds: number[]) => void;
+}
+
 /**
- *  选择服务类别
+ *  选择服务区域
  * 
  */
-class SelectCategory extends React.PureComponent {
+class SelectServiceArea extends React.PureComponent<IProps> {
 
   state = {
     visible: false,
@@ -27,7 +32,7 @@ class SelectCategory extends React.PureComponent {
     this.closeModal();
   }
 
-  showModal = (value) => {
+  showModal = () => {
     this.setState({
       visible: true,
     })
@@ -86,4 +91,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SelectCategory;
+export default SelectServiceArea;

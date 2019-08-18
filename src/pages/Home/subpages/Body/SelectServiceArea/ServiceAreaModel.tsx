@@ -11,13 +11,26 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Footer from '../../Footer';
 import Title from '../../../../../components/Title';
 import CheckboxButton from '../../../../../components/CheckboxButton';
+import { IArea } from '../../../../../model/data';
 
-class CategoryModel extends React.PureComponent {
+interface IState {
+  selectedPointAreaIds: number[];
+  selectedOtherAreaIds: number[];
+}
 
-  constructor(props) {
+interface IProps {
+  closeModal: () => void;
+  areaList: IArea[];
+  selectedServiceAreaIds: number[][];
+  saveServiceArea: (selectedPointAreaIds: number[], selectedOtherAreaIds: number[]) => void;
+}
+
+class ServiceAreaModal extends React.PureComponent<IProps, IState> {
+
+  constructor(props: IProps) {
     super(props);
-    let selectedPointAreaIds = [];
-    let selectedOtherAreaIds = [];
+    let selectedPointAreaIds: number[] = [];
+    let selectedOtherAreaIds: number[] = [];
     if(props.selectedServiceAreaIds.length > 0) {
       ([selectedPointAreaIds, selectedOtherAreaIds = [] ] = props.selectedServiceAreaIds)
     }
@@ -28,7 +41,7 @@ class CategoryModel extends React.PureComponent {
   }
 
   // 切换类别
-  changeServiceArea = (value, type) => {
+  changeServiceArea = (value: number, type: 'point' | 'other') => {
     const { selectedPointAreaIds, selectedOtherAreaIds } = this.state;
     let newSelectedOtherAreaIds = [...selectedOtherAreaIds];
     
@@ -73,7 +86,7 @@ class CategoryModel extends React.PureComponent {
     saveServiceArea(selectedPointAreaIds, selectedOtherAreaIds);
   }
 
-  renderArea = (item, type) => {
+  renderArea = (item: IArea, type: 'point' | 'other') => {
     const { selectedPointAreaIds, selectedOtherAreaIds } = this.state;
     const selectedList = type === 'point' ? selectedPointAreaIds : selectedOtherAreaIds;
     const checked = selectedList.indexOf(item.id) > -1;
@@ -219,4 +232,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default CategoryModel;
+export default ServiceAreaModal;

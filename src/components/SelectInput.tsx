@@ -8,7 +8,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 interface IProps {
-  value: number;
+  value?: number;
   onChange: (value: number) => void;
   text: string;
   placeholder?: string;
